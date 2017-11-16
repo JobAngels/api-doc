@@ -1,0 +1,139 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# API Documentation
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+## Company Colletion [/companies/{?business_uid,country_key,page,status}]
+
+
+### List [GET]
+
+Retrive paginated list of companies
+
++ Parameters
+    + business_uid: 0123456789 (optional) - Registered business number .
+    + country_key: SK (optional) - Unique identifer of country.
+    + status (optional) - Current status of company. Posible values are active|paused|uncompleted|blocked
+    + page (optional, number) - The current page number contains a maximum of 10 results.
+        + Default: 1
+        
+
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": [
+                {
+                    "id": 1,
+                    "created": "2015-08-05T08:40:51Z",
+                    "name": "JobAngels.co, s.r.o.",
+                    "brand_name": "JobAngels & Challengest",
+                    "business_uid": "47944129",
+                    "country_key": "SK",
+                    "status": "active"
+                    "detail": "/companies/1"
+                }
+            ],
+            "url_prev_page": false,
+            "url_next_page": "/companies?p=2"
+        }
+        
+### Create [POST]
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            Location: /companies/1
+    
+    + Body
+    
+            {
+                "id": 1,
+                "name": "JobAngels.co, s.r.o.",
+                "brand_name": "JobAngels & Challengest",
+                "id_number": "47944129",
+                "tax_id_number": "2024155210",
+                "vat_number": "SK2024155210",
+                "country_key": "sk"
+                "created": "2015-08-05T08:40:51Z",
+            }
+        
++ Response 401 (application/json)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+
+## Company [/companies/{id}]
+
+### Detail [GET] 
+
++ Parameters
+    + id (number) - Unique identifer of company 
+
++ Response 200 (application/json)
+    
+        {
+            "id": 1,
+            "name": "JobAngels.co, s.r.o.",
+            "brand_name": "JobAngels & Challengest",
+            "id_number": "47944129",
+            "tax_id_number": "2024155210",
+            "vat_number": "SK2024155210",
+            "country_key": "sk"
+            "created": "2015-08-05T08:40:51Z",
+            "url": "/companies/1"
+        }
+
+
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
