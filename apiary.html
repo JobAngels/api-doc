@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="host" content="http://polls.apiblueprint.org/">
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="host" content="https://api.jobangels.com/docs">
 <meta name="format" content="1A"><style>body {
   max-width: 980px;
   border: 1px solid #ddd;
@@ -1016,19 +1016,23 @@ body .markdown-body
   }
 }
 </style><title>apiary</title></head><body><article class="markdown-body"><h1 id="api-documentation"><a name="user-content-api-documentation" href="#api-documentation" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>API Documentation</h1>
-<p>Polls is a simple API allowing consumers to view polls and vote in them.</p>
-<h2 id="company-colletion-companiesbusiness_uidcountry_keypagestatus"><a name="user-content-company-colletion-companiesbusiness_uidcountry_keypagestatus" href="#company-colletion-companiesbusiness_uidcountry_keypagestatus" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Company Colletion [/companies/{?business_uid,country_key,page,status}]</h2>
+<p>JobAngels API ponúka základnú správu pracovných ponúk a k ním priradený firemný profil. Umožňuje tiež získavať informácie o uchádzačoch, ktorý sa uchádzajú na danú pozíciu.</p>
+<h2 id="company-colletion-companiesbusiness_uidcountry_keystatuspagelimit"><a name="user-content-company-colletion-companiesbusiness_uidcountry_keystatuspagelimit" href="#company-colletion-companiesbusiness_uidcountry_keystatuspagelimit" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Company Colletion [/companies/{?business_uid,country_key,status,page,limit}]</h2>
 <h3 id="list-get"><a name="user-content-list-get" href="#list-get" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>List [GET]</h3>
 <p>Retrive paginated list of companies</p>
 <ul>
 <li>
 <p>Parameters</p>
 <ul>
-<li>business_uid: 0123456789 (optional) - Registered business number .</li>
+<li>business_uid: 0123456789 (optional) - Registered business number. (ex. IČO in SR)</li>
 <li>country_key: SK (optional) - Unique identifer of country.</li>
-<li>status (optional) - Current status of company. Posible values are active|paused|uncompleted|blocked</li>
-<li>page (optional, number) - The current page number contains a maximum of 10 results.<ul>
+<li>status (optional) - Current status of company. Possible values are active|paused|uncompleted|blocked</li>
+<li>page (optional, number) - The current page number.<ul>
 <li>Default: 1</li>
+</ul>
+</li>
+<li>limit (optional, number) - Maximum of results. Limit can be a number from 1 - 100.<ul>
+<li>Default: 10</li>
 </ul>
 </li>
 </ul>

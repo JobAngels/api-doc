@@ -5,7 +5,7 @@ HOST: https://api.jobangels.com/docs
 
 JobAngels API ponúka základnú správu pracovných ponúk a k ním priradený firemný profil. Umožňuje tiež získavať informácie o uchádzačoch, ktorý sa uchádzajú na danú pozíciu.
 
-## Company Colletion [/companies/{?business_uid,country_key,page,status}]
+## Company Colletion [/companies/{?business_uid,country_key,status,page,limit}]
 
 
 ### List [GET]
@@ -18,7 +18,7 @@ Retrive paginated list of companies
     + status (optional) - Current status of company. Possible values are active|paused|uncompleted|blocked
     + page (optional, number) - The current page number.
         + Default: 1
-    + limit (optional, number) - Result contains a maximum of 10 results.
+    + limit (optional, number) - Maximum of results. Limit can be a number from 1 - 100.
         + Default: 10
         
 
