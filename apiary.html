@@ -771,57 +771,57 @@ DELETE : To delete resource
 </ul>
 <p><strong>Company statuses:</strong></p>
 <table>
-	<tr>
-		<td> active </td>
-		<td> The company has an active package and company profile is published. </td>    
-	</tr>
-	<tr>
-		<td> unpublished </td>
-		<td> The company has an active package but company profile is unpublished. </td> 
-	</tr>
-	<tr>
-		<td> paused </td>
-		<td> The company has not active package. </td> 
-	</tr>
-	<tr>
-		<td> blocked </td>
-		<td> The company is blocked. </td> 
-	</tr>
+    <tr>
+        <td> active </td>
+        <td> The company has an active package and company profile is published. </td>    
+    </tr>
+    <tr>
+        <td> unpublished </td>
+        <td> The company has an active package but company profile is unpublished. </td> 
+    </tr>
+    <tr>
+        <td> paused </td>
+        <td> The company has not active package. </td> 
+    </tr>
+    <tr>
+        <td> blocked </td>
+        <td> The company is blocked. </td> 
+    </tr>
 </table>
 <p><strong>Company sizes:</strong></p>
 <table>
-	<tr>
-		<td>1</td>
-		<td>freelancer</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td>startup</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>small business (less than 15 employees)</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td>medium business (less than 200 employees)</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td>large business (more than 200 employees)</td>
-	</tr>
-	<tr>
-		<td>6</td>
-		<td>non-profit organization</td>
-	</tr>
-	<tr>
-		<td>7</td>
-		<td>educational institution</td>
-	</tr>
+    <tr>
+        <td>1</td>
+        <td>freelancer</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>startup</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>small business (less than 15 employees)</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>medium business (less than 200 employees)</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>large business (more than 200 employees)</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>non-profit organization</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>educational institution</td>
+    </tr>
 </table>
 <hr>
 <h2>
-<a id="user-content-company-colletion-companiesbusiness_idcountry_keystatuspagelimit" class="anchor" href="#company-colletion-companiesbusiness_idcountry_keystatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Company Colletion [/companies(?business_id,country_key,status,page,limit)]</h2>
+<a id="user-content-company-colletion-companiesbusiness_idcountry_keystatuspagelimit" class="anchor" href="#company-colletion-companiesbusiness_idcountry_keystatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Company Colletion [/companies{?business_id,country_key,status,page,limit}]</h2>
 <h3>
 <a id="user-content-list-all-companies-get" class="anchor" href="#list-all-companies-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List all companies [GET]</h3>
 <p>Retrive paginated list of companies.</p>
@@ -847,32 +847,32 @@ DELETE : To delete resource
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  [
-  	{
-  		"id": 1,
-  		"created": "2015-08-05T08:40:51Z",
-  		"name": "JobAngels.co, s.r.o.",
-  		"brand_name": "JobAngels &amp; Challengest",
-  		"business_id": "47944129",
-  		"country_key": "SK",
-  		"status": "active"
-  	},
-  	{
-  		"id": 2,
-  		"created": "2017-08-07T09:32:35Z",
-  		"name": "Challengest, s.r.o.",
-  		"brand_name": "Challengest, s.r.o.",
-  		"business_id": "462422156",
-  		"country_key": "SK",
-  		"status": "uncompleted"
-  	}
+      {
+          "id": 1,
+          "created": "2015-08-05T08:40:51Z",
+          "name": "JobAngels.co, s.r.o.",
+          "brand_name": "JobAngels &amp; Challengest",
+          "business_id": "47944129",
+          "country_key": "SK",
+          "status": "active"
+      },
+      {
+          "id": 2,
+          "created": "2017-08-07T09:32:35Z",
+          "name": "Challengest, s.r.o.",
+          "brand_name": "Challengest, s.r.o.",
+          "business_id": "462422156",
+          "country_key": "SK",
+          "status": "uncompleted"
+      }
   ]
 </code></pre>
 </li>
 <li>
 <p>Response 403 (application/json)</p>
 <pre><code>  {
-  	"error": "Unauthorized",
-  	"message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+      "error": "Unauthorized",
+      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
   }
 </code></pre>
 </li>
@@ -883,43 +883,43 @@ DELETE : To delete resource
 <li>
 <p>Request (application/json)</p>
 <pre><code>  {
-  	"name": "JobAngels.co, s.r.o.",
-  	"business_id": "47944129",
-  	"country_key": "SK"
+      "name": "JobAngels.co, s.r.o.",
+      "business_id": "47944129",
+      "country_key": "SK"
   }
 </code></pre>
 </li>
 <li>
 <p>Response 201 (application/json)</p>
 <pre><code>  {
-  	"id": 1
-  	"name": "JobAngels.co, s.r.o.",
-  	"business_id": "47944129",
-  	"country_key": "SK"
+      "id": 1
+      "name": "JobAngels.co, s.r.o.",
+      "business_id": "47944129",
+      "country_key": "SK"
   }
 </code></pre>
 </li>
 <li>
 <p>Response 2001 (application/json)</p>
 <pre><code>  {
-  	"error": "Already exists.",
-  	"message" : "Sorry, company with this business_id and country_key already exists."
+      "error": "Already exists.",
+      "message" : "Sorry, company with this business_id and country_key already exists."
   }
 </code></pre>
 </li>
 <li>
 <p>Response 2002 (application/json)</p>
 <pre><code>  {
-  	"error": "Only one.",
-  	"message" : "Sorry, you can create only one main company profile."
+      "error": "Only one.",
+      "message" : "Sorry, you can create only one main company profile."
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-  	"error": "Unauthorized reqest.",
-  	"message" : "Sorry, your access token is invalid or has been expired."
+      "error": "Unauthorized reqest.",
+      "message" : "Sorry, your access token is invalid or has been expired."
   }
 </code></pre>
 </li>
@@ -940,37 +940,37 @@ DELETE : To delete resource
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  {
-  	"id": 1,
-  	"name": "JobAngels.co, s.r.o.",
-  	"brand_name": "JobAngels &amp; Challengest",
-  	"logo": {
-  		"orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-  		"url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-  		"params": {
-  			"crop": "fit",
-  			"height": 76,
-  			"width": 76
-  		}
-  	}
-  	"profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
-  	"country_key": "SK"
-  	"street": "",
-  	"city": "",
-  	"postal_code": "",
-  	"status": "uncompleted",
-  	"size": null,
-  	"business_id": "47944129",
-  	"tax_id_number": "",
-  	"vat_number": "",
-  	"created": "2015-08-05T08:40:51Z"
+      "id": 1,
+      "name": "JobAngels.co, s.r.o.",
+      "brand_name": "JobAngels &amp; Challengest",
+      "logo": {
+          "orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "params": {
+              "crop": "fit",
+              "height": 76,
+              "width": 76
+          }
+      }
+      "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
+      "country_key": "SK"
+      "street": "",
+      "city": "",
+      "postal_code": "",
+      "status": "uncompleted",
+      "size": null,
+      "business_id": "47944129",
+      "tax_id_number": "",
+      "vat_number": "",
+      "created": "2015-08-05T08:40:51Z"
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-  	"error": "Unauthorized reqest.",
-  	"message" : "Sorry, your access token is invalid or has been expired."
+      "error": "Unauthorized reqest.",
+      "message" : "Sorry, your access token is invalid or has been expired."
   }
 </code></pre>
 </li>
@@ -982,51 +982,51 @@ DELETE : To delete resource
 <li>
 <p>Request (application/json)</p>
 <pre><code>  {
-  	"id": 1,
-  	"street": "Jakubovo námestie 13",
-  	"city": "Bratislava",
-  	"postal_code": "811 09",
-  	"size": 2,
-  	"business_id": "47944129",
-  	"tax_id_number": "2024155210",
-  	"vat_number": "SK2024155210"
+      "id": 1,
+      "street": "Jakubovo námestie 13",
+      "city": "Bratislava",
+      "postal_code": "811 09",
+      "size": 2,
+      "business_id": "47944129",
+      "tax_id_number": "2024155210",
+      "vat_number": "SK2024155210"
   }
 </code></pre>
 </li>
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  {
-  	"id": 1,
-  	"name": "JobAngels.co, s.r.o.",
-  	"brand_name": "JobAngels &amp; Challengest",
-  	"logo": {
-  		"orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-  		"url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-  		"params": {
-  			"crop": "fit",
-  			"height": 76,
-  			"width": 76
-  		}
-  	}
-  	"profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
-  	"country_key": "SK"
-  	"street": "Jakubovo námestie 13",
-  	"city": "Bratislava",
-  	"postal_code": "811 09",
-  	"status": "active",
-  	"size": 2,
-  	"business_id": "47944129",
-  	"tax_id_number": "2024155210",
-  	"vat_number": "SK2024155210",
-  	"created": "2015-08-05T08:40:51Z"
+      "id": 1,
+      "name": "JobAngels.co, s.r.o.",
+      "brand_name": "JobAngels &amp; Challengest",
+      "logo": {
+          "orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "params": {
+              "crop": "fit",
+              "height": 76,
+              "width": 76
+          }
+      }
+      "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
+      "country_key": "SK"
+      "street": "Jakubovo námestie 13",
+      "city": "Bratislava",
+      "postal_code": "811 09",
+      "status": "active",
+      "size": 2,
+      "business_id": "47944129",
+      "tax_id_number": "2024155210",
+      "vat_number": "SK2024155210",
+      "created": "2015-08-05T08:40:51Z"
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-  	"error": "Unauthorized reqest.",
-  	"message" : "Sorry, your access token is invalid or has been expired."
+      "error": "Unauthorized reqest.",
+      "message" : "Sorry, your access token is invalid or has been expired."
   }
 </code></pre>
 </li>
