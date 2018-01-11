@@ -7,7 +7,7 @@ Represents company details.
 - id `(number)` : Unique identifier.
 - name `(string)` : Company name.
 - brand_name `(string)` : Brand name.
-- logo `(string)` : Company logo as URL in origin size.
+- logo `(string)` : Company logo as URL.
 - profile_url `(string)` : Company profile as URL on JobAngels.co.
 - country_key `(string)` : Unique identifer of country as code with two-letter (ISO 3166-1 alpha-2).
 - street `(string)` : Company street with number.
@@ -172,15 +172,7 @@ A single Company object with all its details
             "id": 1,
             "name": "JobAngels.co, s.r.o.",
             "brand_name": "JobAngels & Challengest",
-            "logo": {
-                "orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-                "url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-                "params": {
-                    "crop": "fit",
-                    "height": 76,
-                    "width": 76
-                }
-            }
+            "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
             "profile_url": "https://jobangels.com/JobAngels&Challengest",
             "country_key": "SK"
             "street": "",
@@ -223,15 +215,7 @@ Update company details
             "id": 1,
             "name": "JobAngels.co, s.r.o.",
             "brand_name": "JobAngels & Challengest",
-            "logo": {
-                "orig": "https://res.cloudinary.org/jobangels/image/upload/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-                "url": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-                "params": {
-                    "crop": "fit",
-                    "height": 76,
-                    "width": 76
-                }
-            }
+            "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
             "profile_url": "https://jobangels.com/JobAngels&Challengest",
             "country_key": "SK"
             "street": "Jakubovo námestie 13",
@@ -250,4 +234,42 @@ Update company details
         {
             "error": "Unauthorized reqest.",
             "message" : "Sorry, your access token is invalid or has been expired."
+        }
+
+
+## Company Jobs [/companies/{id}/jobs{?status,page,limit}]
+Jobs for company object with simple details
+
++ Parameters:
+    + id (number, required, `1`) - Company identifier as integer.
+    + status (string, optional, `published`) - Current status of job.
+    + page (number, optional) - The current page number.
+        + Default: 1
+    + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
+        + Default: 10
+
+### Retrive Company Jobs [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 15,
+                "key": "ab2dh6fe",
+                "name": "PHP Programmer",
+                "status": "published"
+            },
+            {
+                "id": 248,
+                "key": "poklrei7",
+                "name": "Sales Manager",
+                "status": "closed"
+            },
+        ]
+
++ Response 403 (application/json)
+
+        {
+            "error": "Unauthorized",
+            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
         }

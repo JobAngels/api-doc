@@ -1,8 +1,7 @@
 FORMAT: 1A
 HOST: https://api.jobangels.com
 
-# JobAngels API Documentation 
-
+# JobAngels API Documentation v0.1
 JobAngels API ponúka základnú správu pracovných ponúk a k ním priradený firemný profil. Umožňuje tiež získavať informácie o uchádzačoch, ktorý sa uchádzajú na danú pozíciu.
 
 # Allowed HTTPs requests:
