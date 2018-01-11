@@ -577,7 +577,7 @@ A single Job object with all its details
         {
             "id": 15,
             "key": "ab2dh6fe",
-            "name": "PHP Programmer",
+            "name": "PHP Programmers",
             "status": "published",
             "created": "2015-08-05T08:40:51Z"
         }
@@ -585,7 +585,7 @@ A single Job object with all its details
 ### Retrieve a Job [GET] 
 + Response 200
 
-    [Job]
+    [Job][]
 
 + Response 401 (application/json)
 
