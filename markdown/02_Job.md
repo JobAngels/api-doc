@@ -283,7 +283,7 @@ A single Job object with all its details
 ### Retrieve a Job [GET] 
 + Response 200
 
-    [Job][]
+        [Job][]
 
 + Response 401 (application/json)
 
