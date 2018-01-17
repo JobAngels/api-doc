@@ -1,7 +1,5 @@
 # Group Job
-Represents company details.
 
----
 **Job attributes:**
 
 - id `(number)` : Unique identifier.
@@ -9,18 +7,19 @@ Represents company details.
 - name `(string)` : Job position name.
 - url `(string)` : Job as URL on JobAngels.co.
 - cover `(string)` : Job cover as URL in origin size.
-- reward `(number)` : Angel reward.
+- reward `(object)` : Reward for possible hiring (total, angel, currency).
+- salary `(object)` : Salary as range (min, max, currency). Showing only if salary is not hidden.
 - status `(string)` : Current status of job.
 - lang `(string)`: Job language represented as key (two characters: sk, cs, en).
 - locations `(object)`: Job locations.
-- field_of_work_id `(number)` : Job field of work as ID.
+- field_of_work `(object)` : Job field of work as object (id, name).
 
 
 **Job statuses:**
 <table>
     <tr>
-        <td> draft </td>
-        <td> The job is only in draft version and it's not published. </td>    
+        <th> draft </th>
+        <th> The job is only in draft version and it's not published. </th>    
     </tr>
     <tr>
         <td> published </td>
@@ -40,8 +39,8 @@ Represents company details.
 **Fields of work:**
 <table>
     <tr>
-        <td> **id** </td>
-        <td> **name** </td>
+        <th> id </th>
+        <th> name </th>
     </tr>
     <tr>
         <td> 1 </td>
@@ -185,13 +184,11 @@ Represents company details.
     </tr>
 </table>
 
----
-## Job Colletion [/jobs{?field_of_work,status,page,limit}]
+## Colletion [/jobs{?field_of_work,status,page,limit}]
 
-### List all companies [GET]
-Retrive paginated list of companies.
+### List [GET]
 
-+ Parameters
++ Parameters:
     + field_of_work: 1 (number, optional) - Return jobs only with this field of work
     + status (string, optional) - Current status of job (Job statuses.)
     + page (number, optional) - The current page number.
@@ -207,13 +204,201 @@ Retrive paginated list of companies.
                 "id": 15,
                 "key": "ab2dh6fe",
                 "name": "PHP Programmer",
+                "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+                "reward": {
+                    total: 1200,
+                    angel: 600,
+                    currency: "EUR"
+                },
+                "salary": {
+                    min: 1200,
+                    max: 2500,
+                    currency: "EUR"
+                },
                 "status": "published"
             },
             {
                 "id": 248,
                 "key": "poklrei7",
-                "name": "Sales Manager",
+                "name": "Sales Manager - Praha",
+                "url": "https://jobangels.com/poklrei7/Sales-Manager-Praha",
+                "reward": {
+                    total: 450,
+                    angel: 225,
+                    currency: "EUR"
+                },
+                "salary": {
+                    min: 25000,
+                    max: 35000,
+                    currency: "CZK"
+                },
                 "status": "closed"
+            }
+        ]
+
++ Response 403 (application/json)
+
+        {
+            "error": "Unauthorized",
+            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+        }
+
+### Create [PUT]
+
++ Request (application/json)
+
+        {
+            "name": "PHP Programmer"
+        }
+
+
++ Response 201 (application/json)
+
+        {
+            "id": 15,
+            "key": "ab2dh6fe",
+            "name": "PHP Programmer",
+            "status": "draft"
+        }        
+
+
++ Response 401 (application/json)
+
+        {
+            "error": "Unauthorized reqest.",
+            "message" : "Sorry, your access token is invalid or has been expired."
+        }
+
+## Offer [/jobs/{id}]
+
++ Parameters
+    + id (required, number, `1`) - Numeric `id` of the job to perform action with.
+
+
+### Detail [GET] 
+
++ Response 200
+
+        {
+            "id": 15,
+            "key": "ab2dh6fe",
+            "name": "PHP Programmers",
+            "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+            "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
+            "company_id": 1,
+            "lang": "sk",
+            "reward": {
+                total: 1200,
+                angel: 600,
+                currency: "EUR"
+            },
+            "salary": {
+                min: 1200,
+                max: 2500,
+                currency: "EUR"
+            },
+            "status": "published",
+            "locations":[
+                {
+                      "id": 351,
+                      "country_key": "SK",
+                      "street": "Jakubovo nám. 13",
+                      "city": "Bratislava",
+                      "postal_code": "811 09",
+                      "region": "Bratislavský kraj",
+                      "lat": 48.1459258,
+                      "lng": 17.1071938  
+                },
+                {
+                      "id": 351,
+                      "country_key": "SK",
+                      "street": "Černyševského 10",
+                      "city": "Petržalka",
+                      "postal_code": "85104",
+                      "region": "Bratislavský kraj",
+                      "lat": 48.3804996,
+                      "lng": 17.5877285    
+                }
+            ],
+            "field_of_work": {
+                "id": 2,
+                "name": "IT & Telecommunication"
+            }
+        }
+
++ Response 401 (application/json)
+
+        {
+            "error": "Unauthorized reqest.",
+            "message" : "Sorry, your access token is invalid or has been expired."
+        }
+
+### Update [POST]
+
++ Request (application/json)
+
+        {
+            "id": 15,
+            "key": "ab2dh6fe",
+            "name": "PHP Junior Programmer",
+            "reward": {
+                total: 2000
+            }
+        }
+        
++ Response 200 (application/json)
+    
+        {
+            "id": 15,
+            "key": "ab2dh6fe",
+            "name": "PHP Junior Programmer",
+            "reward": {
+                total: 2000,
+                angel: 1000,
+                currency: EUR
+            },
+            "status": "published"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "error": "Unauthorized reqest.",
+            "message" : "Sorry, your access token is invalid or has been expired."
+        }
+
+
+
+## Applications [/jobs/{id}/applications{?status,page,limit}]
+
++ Parameters:
+    + id (number, required, `15`) - Company identifier as integer.
+    + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
+    + page (number, optional) - The current page number.
+        + Default: 1
+    + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
+        + Default: 10
+
+
+### List [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1512,
+                "fname": "Peter",
+                "sname": "K.",
+                "application_date": "2018-01-11T08:40:51.620Z",
+                "status": "new"
+            },
+            {
+                "id": 248,
+                "fname": "Jaroslav",
+                "sname": "Novotný",
+                "application_date": "2018-01-14T18:34:17.186Z",
+                "viewed_date": "2018-01-15T09:03:52.152Z",
+                "status": "viewed"
             },
         ]
 
@@ -224,98 +409,72 @@ Retrive paginated list of companies.
             "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
         }
 
-### Create a Job [PUT]
+
+## Locations [/jobs/{id}/locations{?status,page,limit}]
+
++ Parameters:
+    + id (number, required, `15`) - Company identifier as integer.
+    + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
+    + page (number, optional) - The current page number.
+        + Default: 1
+    + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
+        + Default: 10
+
+### List [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1512,
+                "fname": "Peter",
+                "sname": "K.",
+                "application_date": "2018-01-11T08:40:51.620Z",
+                "status": "new"
+            },
+            {
+                "id": 248,
+                "fname": "Jaroslav",
+                "sname": "Novotný",
+                "application_date": "2018-01-14T18:34:17.186Z",
+                "viewed_date": "2018-01-15T09:03:52.152Z",
+                "status": "viewed"
+            },
+        ]
+
++ Response 403 (application/json)
+
+        {
+            "error": "Unauthorized",
+            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+        }
+
+### Create [PUT]
+
 + Request (application/json)
 
         {
-            "name": "PHP Programmer"
+            "address": "Jakubovo nám. 13, Bratislava"
         }
-                
-        
+
+   
 + Response 201 (application/json)
 
         {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Programmer",
-            "status": "published"
-        }
-            
-        
-+ Response 2001 (application/json)
-
-        {
-            "error": "Already exists.",
-            "message" : "Sorry, company with this business_id and country_key already exists."
-        }
-
-+ Response 2002 (application/json)
-
-        {
-            "error": "Only one.",
-            "message" : "Sorry, you can create only one main company profile."
+            "id": 153,
+            "country_key": "SK",
+            "street": "Jakubovo námestie 13",
+            "city": "Bratislava",
+            "postal_code": "811 09",
+            "region": "Bratislavský kraj",
+            "lat": 48.1459258,
+            "lng": 17.1071938 
         }
 
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
-        }
-
-## Job [/jobs/{id}]
-A single Job object with all its details
-
-+ Parameters
-    + id (required, number, `1`) - Numeric `id` of the Company to perform action with.
-
-+ Model (application/json)
-        
-        {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Programmers",
-            "status": "published",
-            "created": "2015-08-05T08:40:51Z"
-        }
-
-### Retrieve a Job [GET] 
-+ Response 200
-
-        [Job][]
-
-+ Response 401 (application/json)
-
-        {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
-        }
-
-### Update a Job [POST]
-Update job details
-
-+ Request (application/json)
-
-        {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Junior Programmer"
-        }
-        
-+ Response 200 (application/json)
-    
-        {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Junior Programmer",
-            "status": "published",
-            "created": "2015-08-05T08:40:51Z"
-        }
-
-+ Response 401 (application/json)
-
-        {
-            "error": "Unauthorized reqest.",
+            "error": "Unauthorized request.",
             "message" : "Sorry, your access token is invalid or has been expired."
         }
