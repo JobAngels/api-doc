@@ -188,7 +188,7 @@
 
 ### List [GET]
 
-+ Parameters:
++ Parameters
     + field_of_work: 1 (number, optional) - Return jobs only with this field of work
     + status (string, optional) - Current status of job (Job statuses.)
     + page (number, optional) - The current page number.
@@ -371,8 +371,8 @@
 
 ## Applications [/jobs/{id}/applications{?status,page,limit}]
 
-+ Parameters:
-    + id (number, required, `15`) - Company identifier as integer.
++ Parameters
+    + id (number, required, `15`) - Job identifier as integer.
     + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
     + page (number, optional) - The current page number.
         + Default: 1
@@ -412,7 +412,7 @@
 
 ## Locations [/jobs/{id}/locations{?status,page,limit}]
 
-+ Parameters:
++ Parameters
     + id (number, required, `15`) - Company identifier as integer.
     + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
     + page (number, optional) - The current page number.
