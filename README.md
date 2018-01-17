@@ -534,7 +534,7 @@ DELETE : To delete resource
 
 ### List [GET]
 
-+ Parameters:
++ Parameters
     + field_of_work: 1 (number, optional) - Return jobs only with this field of work
     + status (string, optional) - Current status of job (Job statuses.)
     + page (number, optional) - The current page number.
@@ -717,8 +717,8 @@ DELETE : To delete resource
 
 ## Applications [/jobs/{id}/applications{?status,page,limit}]
 
-+ Parameters:
-    + id (number, required, `15`) - Company identifier as integer.
++ Parameters
+    + id (number, required, `15`) - Job identifier as integer.
     + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
     + page (number, optional) - The current page number.
         + Default: 1
@@ -758,7 +758,7 @@ DELETE : To delete resource
 
 ## Locations [/jobs/{id}/locations{?status,page,limit}]
 
-+ Parameters:
++ Parameters
     + id (number, required, `15`) - Company identifier as integer.
     + status (string, optional) - Status of application (new, viewed, hired, rejected, released).
     + page (number, optional) - The current page number.
@@ -881,6 +881,15 @@ DELETE : To delete resource
 
 # Group Changelog
 ---
+
+## 0.3 (2018-01-17)
+**Add Resources**
+- Location resourse - basic
+
+**Update Resource**
+- company colletion was updated
+- job colletion was updated
+
 
 ## 0.2 (2018-01-11)
 **Add Resources**
