@@ -69,7 +69,7 @@
     </tr>
 </table>
 
-## Colletion [/companies{?business_id,country_key,status,page,limit}]
+## Company Colletion [/companies{?business_id,country_key,status,page,limit}]
 
 + Parameters:
     + business_id: `0123456789` (string, optional) - Company identification numbers in specified country. (ex. IČO in SR)
@@ -80,37 +80,50 @@
     + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
         + Default: 10
 
-### List [GET]
+### List of companies [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "name": "JobAngels.co, s.r.o.",
-                "brand_name": "JobAngels & Challengest",
-                "business_id": "47944129",
-                "country_key": "SK",
-                "status": "active"
-            },
-            {
-                "id": 2,
-                "name": "Challengest, s.r.o.",
-                "brand_name": "Challengest, s.r.o.",
-                "business_id": "462422156",
-                "country_key": "SK",
-                "status": "uncompleted"
-            }
-        ]
+        {   
+            "success": true,
+            "data": [
+                {
+                    "id": 1,
+                    "name": "JobAngels.co, s.r.o.",
+                    "brand_name": "JobAngels & Challengest",
+                    "business_id": "47944129",
+                    "country_key": "SK",
+                    "status": "active"
+                },
+                {
+                    "id": 2,
+                    "name": "Challengest, s.r.o.",
+                    "brand_name": "Challengest, s.r.o.",
+                    "business_id": "462422156",
+                    "country_key": "SK",
+                    "status": "uncompleted"
+                }
+            ]
+            "page": 1,
+            "perPage": 2,
+            "itemCount": 314,
+            "prevPage": null,
+            "nextPage": "/companies?page=2"
+        }
 
 + Response 403 (application/json)
 
         {
-            "error": "Unauthorized",
-            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "messages": "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }
 
-### Create [PUT]
+### Create company [POST]
 
 + Request (application/json)
 
@@ -124,84 +137,109 @@
 + Response 201 (application/json)
 
         {
-            "id": 1
-            "name": "JobAngels.co, s.r.o.",
-            "business_id": "47944129",
-            "country_key": "SK"
+            "success": true,
+            "data": {
+                "id": 1
+                "name": "JobAngels.co, s.r.o.",
+                "business_id": "47944129",
+                "country_key": "SK"
+            }
         }
             
         
 + Response 2001 (application/json)
 
         {
-            "error": "Already exists.",
-            "message" : "Sorry, company with this business_id and country_key already exists."
+            "success": false
+            "errors": [
+                {
+                    "code": 2001,
+                    "message" : "Sorry, company with this business_id and country_key already exists."
+                }
+            ]
         }
 
 + Response 2002 (application/json)
 
         {
-            "error": "Only one.",
-            "message" : "Sorry, you can create only one main company profile."
+            "success": false
+            "errors": [
+                {
+                    "code": 2002,
+                    "message" : "Sorry, you can create only one main company profile."
+                }
+            ]
         }
 
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
         }
 
-## Profile [/companies/{id}]
+## Company [/companies/{id}]
 
 + Parameters
     + id (required, Number, `1`) - Numeric `id` of the Company to perform action with.
 
-### Detail [GET] 
+### Detail of company [GET] 
 + Response 200 (application/json)
     
         {
-            "id": 1,
-            "name": "JobAngels.co, s.r.o.",
-            "brand_name": "JobAngels & Challengest",
-            "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-            "profile_url": "https://jobangels.com/JobAngels&Challengest",
-            "country_key": "SK",
-            "billing_address": {
-                "country_key": "SK"
-                "contry_name": "Slovakia"
-                "street": "",
-                "city": "",
-                "postal_code": ""
-            },
-            "contact_address": {
-                "country_key": "SK"
-                "contry_name": "Slovakia"
-                "street": "",
-                "city": "",
-                "postal_code": ""
-            },
-            "status": "uncompleted",
-            "size": null,
-            "business_id": "47944129",
-            "tax_id_number": "",
-            "vat_number": ""
+            "success": true,
+            "data": {
+                "id": 1,
+                "name": "JobAngels.co, s.r.o.",
+                "brand_name": "JobAngels & Challengest",
+                "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+                "profile_url": "https://jobangels.com/JobAngels&Challengest",
+                "country_key": "SK",
+                "billing_address": {
+                    "country_key": "SK"
+                    "contry_name": "Slovakia"
+                    "street": "",
+                    "city": "",
+                    "postal_code": ""
+                },
+                "contact_address": {
+                    "country_key": "SK"
+                    "contry_name": "Slovakia"
+                    "street": "",
+                    "city": "",
+                    "postal_code": ""
+                },
+                "status": "uncompleted",
+                "size": null,
+                "business_id": "47944129",
+                "tax_id_number": "",
+                "vat_number": ""
+            }
         }
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
         }
 
-### Update [POST]
+### Update Company [PUT]
 
 + Request (application/json)
 
         {
-            "id": 1,
             "billing_address": {
                 "country_key": "SK"
                 "street": "Černyševského 10",
@@ -223,40 +261,48 @@
 + Response 200 (application/json)
     
         {
-            "id": 1,
-            "name": "JobAngels.co, s.r.o.",
-            "brand_name": "JobAngels & Challengest",
-            "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-            "profile_url": "https://jobangels.com/JobAngels&Challengest",
-            "country_key": "SK",
-            "billing_address": {
-                "country_key": "SK"
-                "street": "Černyševského 10",
-                "city": "Bratislava",
-                "postal_code": "85104"
-            },
-            "contact_address": {
-                "country_key": "SK"
-                "street": "Jakubovo nám. 13",
-                "city": "Bratislava",
-                "postal_code": "81109"
-            },
-            "status": "active",
-            "size": 2,
-            "business_id": "47944129",
-            "tax_id_number": "2024155210",
-            "vat_number": "SK2024155210"
+            "success": true,
+            "data": {
+                "id": 1,
+                "name": "JobAngels.co, s.r.o.",
+                "brand_name": "JobAngels & Challengest",
+                "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+                "profile_url": "https://jobangels.com/JobAngels&Challengest",
+                "country_key": "SK",
+                "billing_address": {
+                    "country_key": "SK"
+                    "street": "Černyševského 10",
+                    "city": "Bratislava",
+                    "postal_code": "85104"
+                },
+                "contact_address": {
+                    "country_key": "SK"
+                    "street": "Jakubovo nám. 13",
+                    "city": "Bratislava",
+                    "postal_code": "81109"
+                },
+                "status": "active",
+                "size": 2,
+                "business_id": "47944129",
+                "tax_id_number": "2024155210",
+                "vat_number": "SK2024155210"
+            }
         }
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
         }
 
 
-## Jobs [/companies/{id}/jobs{?status,page,limit}]
+## Company Jobs Collection [/companies/{id}/jobs{?status,page,limit}]
 
 + Parameters:
     + id (number, required, `1`) - Company identifier as integer.
@@ -266,33 +312,46 @@
     + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
         + Default: 10
 
-### List [GET]
+### Retrive Jobs of Company[GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 15,
-                "key": "ab2dh6fe",
-                "name": "PHP Programmer",
-                "status": "published"
-            },
-            {
-                "id": 248,
-                "key": "poklrei7",
-                "name": "Sales Manager",
-                "status": "closed"
-            },
-        ]
+        {
+            "success": false
+            "data": [
+                {
+                    "id": 15,
+                    "key": "ab2dh6fe",
+                    "name": "PHP Programmer",
+                    "status": "published"
+                },
+                {
+                    "id": 248,
+                    "key": "poklrei7",
+                    "name": "Sales Manager",
+                    "status": "closed"
+                }
+            ],
+            "page": 1,
+            "perPage": 2,
+            "itemCount": 314,
+            "prevPage": null,
+            "nextPage": "/companies/1/jobs?page=2"
+        }
 
 + Response 403 (application/json)
 
         {
-            "error": "Unauthorized",
-            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }
 
-### Create [PUT]
+### Create Job [POST]
 
 + Request (application/json)
 
@@ -304,16 +363,24 @@
 + Response 201 (application/json)
 
         {
-            "id": 1
-            "key": "ab2dh6fe"
-            "name": ""PHP Junior Programator"
+            "success": false
+            "data": {
+                "id": 1
+                "key": "ab2dh6fe"
+                "name": ""PHP Junior Programator"
+            }
         }
             
 
 
-+ Response 401 (application/json)
++ Response 403 (application/json)
 
         {
-            "error": "Unauthorized request.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }

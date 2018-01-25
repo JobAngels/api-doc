@@ -23,3 +23,45 @@ DELETE : To delete resource
 - 405 `Method Not Allowed` - requested method is not supported for resource.
 - 2001 `Already exists` - the request was successful but the creating resourse already exists.
 - 2002 `Limited` - the request was successfull but you have limited resource creation.
+
+# Successed Result:
+    
+    {
+      "success": true,
+      "data": [
+        {
+          "name": "JobAngels",
+        }
+      ]
+    }
+
+# Successed Result with Pagination:
+    
+    {
+      "success": true,
+      "data": [
+        {
+          "name": "JobAngels",
+        },
+        {
+          "name": "Challengest",
+        }
+      ],
+      "page": 3,
+      "perPage": 10,
+      "itemCount": 34,
+      "prevPage": "/companies?page=2",
+      "nextPage": "/companies?page=4"
+    }
+
+# Result with errors:
+    
+    {
+      "success": false,
+      "errors": [
+        {
+          "code": 404,
+          "message": "Page not found",
+        }
+      ]
+    }

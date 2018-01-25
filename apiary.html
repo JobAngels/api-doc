@@ -749,6 +749,48 @@ DELETE : To delete resource
 <li>2002 <code>Limited</code> - the request was successfull but you have limited resource creation.</li>
 </ul>
 <h1>
+<a id="user-content-successed-result" class="anchor" href="#successed-result" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Successed Result:</h1>
+<pre><code>{
+  "success": true,
+  "data": [
+    {
+      "name": "JobAngels",
+    }
+  ]
+}
+</code></pre>
+<h1>
+<a id="user-content-successed-result-with-pagination" class="anchor" href="#successed-result-with-pagination" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Successed Result with Pagination:</h1>
+<pre><code>{
+  "success": true,
+  "data": [
+    {
+      "name": "JobAngels",
+    },
+    {
+      "name": "Challengest",
+    }
+  ],
+  "page": 3,
+  "perPage": 10,
+  "itemCount": 34,
+  "prevPage": "/companies?page=2",
+  "nextPage": "/companies?page=4"
+}
+</code></pre>
+<h1>
+<a id="user-content-result-with-errors" class="anchor" href="#result-with-errors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result with errors:</h1>
+<pre><code>{
+  "success": false,
+  "errors": [
+    {
+      "code": 404,
+      "message": "Page not found",
+    }
+  ]
+}
+</code></pre>
+<h1>
 <a id="user-content-group-company" class="anchor" href="#group-company" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Group Company</h1>
 <p><strong>Company attributes:</strong></p>
 <ul>
@@ -817,7 +859,7 @@ DELETE : To delete resource
     </tr>
 </table>
 <h2>
-<a id="user-content-colletion-companiesbusiness_idcountry_keystatuspagelimit" class="anchor" href="#colletion-companiesbusiness_idcountry_keystatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colletion [/companies{?business_id,country_key,status,page,limit}]</h2>
+<a id="user-content-company-colletion-companiesbusiness_idcountry_keystatuspagelimit" class="anchor" href="#company-colletion-companiesbusiness_idcountry_keystatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Company Colletion [/companies{?business_id,country_key,status,page,limit}]</h2>
 <ul>
 <li>Parameters:
 <ul>
@@ -838,41 +880,54 @@ DELETE : To delete resource
 </li>
 </ul>
 <h3>
-<a id="user-content-list-get" class="anchor" href="#list-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-list-of-companies-get" class="anchor" href="#list-of-companies-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List of companies [GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
-<pre><code>  [
-      {
-          "id": 1,
-          "name": "JobAngels.co, s.r.o.",
-          "brand_name": "JobAngels &amp; Challengest",
-          "business_id": "47944129",
-          "country_key": "SK",
-          "status": "active"
-      },
-      {
-          "id": 2,
-          "name": "Challengest, s.r.o.",
-          "brand_name": "Challengest, s.r.o.",
-          "business_id": "462422156",
-          "country_key": "SK",
-          "status": "uncompleted"
-      }
-  ]
+<pre><code>  {   
+      "success": true,
+      "data": [
+          {
+              "id": 1,
+              "name": "JobAngels.co, s.r.o.",
+              "brand_name": "JobAngels &amp; Challengest",
+              "business_id": "47944129",
+              "country_key": "SK",
+              "status": "active"
+          },
+          {
+              "id": 2,
+              "name": "Challengest, s.r.o.",
+              "brand_name": "Challengest, s.r.o.",
+              "business_id": "462422156",
+              "country_key": "SK",
+              "status": "uncompleted"
+          }
+      ]
+      "page": 1,
+      "perPage": 2,
+      "itemCount": 314,
+      "prevPage": null,
+      "nextPage": "/companies?page=2"
+  }
 </code></pre>
 </li>
 <li>
 <p>Response 403 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized",
-      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "messages": "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h3>
-<a id="user-content-create-put" class="anchor" href="#create-put" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create [PUT]</h3>
+<a id="user-content-create-company-post" class="anchor" href="#create-company-post" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create company [POST]</h3>
 <ul>
 <li>
 <p>Request (application/json)</p>
@@ -886,40 +941,58 @@ DELETE : To delete resource
 <li>
 <p>Response 201 (application/json)</p>
 <pre><code>  {
-      "id": 1
-      "name": "JobAngels.co, s.r.o.",
-      "business_id": "47944129",
-      "country_key": "SK"
+      "success": true,
+      "data": {
+          "id": 1
+          "name": "JobAngels.co, s.r.o.",
+          "business_id": "47944129",
+          "country_key": "SK"
+      }
   }
 </code></pre>
 </li>
 <li>
 <p>Response 2001 (application/json)</p>
 <pre><code>  {
-      "error": "Already exists.",
-      "message" : "Sorry, company with this business_id and country_key already exists."
+      "success": false
+      "errors": [
+          {
+              "code": 2001,
+              "message" : "Sorry, company with this business_id and country_key already exists."
+          }
+      ]
   }
 </code></pre>
 </li>
 <li>
 <p>Response 2002 (application/json)</p>
 <pre><code>  {
-      "error": "Only one.",
-      "message" : "Sorry, you can create only one main company profile."
+      "success": false
+      "errors": [
+          {
+              "code": 2002,
+              "message" : "Sorry, you can create only one main company profile."
+          }
+      ]
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h2>
-<a id="user-content-profile-companiesid" class="anchor" href="#profile-companiesid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Profile [/companies/{id}]</h2>
+<a id="user-content-company-companiesid" class="anchor" href="#company-companiesid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Company [/companies/{id}]</h2>
 <ul>
 <li>Parameters
 <ul>
@@ -928,55 +1001,62 @@ DELETE : To delete resource
 </li>
 </ul>
 <h3>
-<a id="user-content-detail-get" class="anchor" href="#detail-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detail [GET]</h3>
+<a id="user-content-detail-of-company-get" class="anchor" href="#detail-of-company-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detail of company [GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  {
-      "id": 1,
-      "name": "JobAngels.co, s.r.o.",
-      "brand_name": "JobAngels &amp; Challengest",
-      "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-      "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
-      "country_key": "SK",
-      "billing_address": {
-          "country_key": "SK"
-          "contry_name": "Slovakia"
-          "street": "",
-          "city": "",
-          "postal_code": ""
-      },
-      "contact_address": {
-          "country_key": "SK"
-          "contry_name": "Slovakia"
-          "street": "",
-          "city": "",
-          "postal_code": ""
-      },
-      "status": "uncompleted",
-      "size": null,
-      "business_id": "47944129",
-      "tax_id_number": "",
-      "vat_number": ""
+      "success": true,
+      "data": {
+          "id": 1,
+          "name": "JobAngels.co, s.r.o.",
+          "brand_name": "JobAngels &amp; Challengest",
+          "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
+          "country_key": "SK",
+          "billing_address": {
+              "country_key": "SK"
+              "contry_name": "Slovakia"
+              "street": "",
+              "city": "",
+              "postal_code": ""
+          },
+          "contact_address": {
+              "country_key": "SK"
+              "contry_name": "Slovakia"
+              "street": "",
+              "city": "",
+              "postal_code": ""
+          },
+          "status": "uncompleted",
+          "size": null,
+          "business_id": "47944129",
+          "tax_id_number": "",
+          "vat_number": ""
+      }
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h3>
-<a id="user-content-update-post" class="anchor" href="#update-post" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update [POST]</h3>
+<a id="user-content-update-company-put" class="anchor" href="#update-company-put" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update Company [PUT]</h3>
 <ul>
 <li>
 <p>Request (application/json)</p>
 <pre><code>  {
-      "id": 1,
       "billing_address": {
           "country_key": "SK"
           "street": "Černyševského 10",
@@ -999,43 +1079,51 @@ DELETE : To delete resource
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  {
-      "id": 1,
-      "name": "JobAngels.co, s.r.o.",
-      "brand_name": "JobAngels &amp; Challengest",
-      "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
-      "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
-      "country_key": "SK",
-      "billing_address": {
-          "country_key": "SK"
-          "street": "Černyševského 10",
-          "city": "Bratislava",
-          "postal_code": "85104"
-      },
-      "contact_address": {
-          "country_key": "SK"
-          "street": "Jakubovo nám. 13",
-          "city": "Bratislava",
-          "postal_code": "81109"
-      },
-      "status": "active",
-      "size": 2,
-      "business_id": "47944129",
-      "tax_id_number": "2024155210",
-      "vat_number": "SK2024155210"
+      "success": true,
+      "data": {
+          "id": 1,
+          "name": "JobAngels.co, s.r.o.",
+          "brand_name": "JobAngels &amp; Challengest",
+          "logo": "https://jobangels.net/jobangels/image/upload/c_fit,h_76,w_76/v1486575885/05e9e3222762786d18e8da2c97fb6fcf47888b33665978c2ca0c8d4c9abd72d71a27c80b.png",
+          "profile_url": "https://jobangels.com/JobAngels&amp;Challengest",
+          "country_key": "SK",
+          "billing_address": {
+              "country_key": "SK"
+              "street": "Černyševského 10",
+              "city": "Bratislava",
+              "postal_code": "85104"
+          },
+          "contact_address": {
+              "country_key": "SK"
+              "street": "Jakubovo nám. 13",
+              "city": "Bratislava",
+              "postal_code": "81109"
+          },
+          "status": "active",
+          "size": 2,
+          "business_id": "47944129",
+          "tax_id_number": "2024155210",
+          "vat_number": "SK2024155210"
+      }
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h2>
-<a id="user-content-jobs-companiesidjobsstatuspagelimit" class="anchor" href="#jobs-companiesidjobsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jobs [/companies/{id}/jobs{?status,page,limit}]</h2>
+<a id="user-content-company-jobs-collection-companiesidjobsstatuspagelimit" class="anchor" href="#company-jobs-collection-companiesidjobsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Company Jobs Collection [/companies/{id}/jobs{?status,page,limit}]</h2>
 <ul>
 <li>Parameters:
 <ul>
@@ -1055,37 +1143,50 @@ DELETE : To delete resource
 </li>
 </ul>
 <h3>
-<a id="user-content-list-get-1" class="anchor" href="#list-get-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-retrive-jobs-of-companyget" class="anchor" href="#retrive-jobs-of-companyget" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Retrive Jobs of Company[GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
-<pre><code>  [
-      {
-          "id": 15,
-          "key": "ab2dh6fe",
-          "name": "PHP Programmer",
-          "status": "published"
-      },
-      {
-          "id": 248,
-          "key": "poklrei7",
-          "name": "Sales Manager",
-          "status": "closed"
-      },
-  ]
+<pre><code>  {
+      "success": false
+      "data": [
+          {
+              "id": 15,
+              "key": "ab2dh6fe",
+              "name": "PHP Programmer",
+              "status": "published"
+          },
+          {
+              "id": 248,
+              "key": "poklrei7",
+              "name": "Sales Manager",
+              "status": "closed"
+          }
+      ],
+      "page": 1,
+      "perPage": 2,
+      "itemCount": 314,
+      "prevPage": null,
+      "nextPage": "/companies/1/jobs?page=2"
+  }
 </code></pre>
 </li>
 <li>
 <p>Response 403 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized",
-      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h3>
-<a id="user-content-create-put-1" class="anchor" href="#create-put-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create [PUT]</h3>
+<a id="user-content-create-job-post" class="anchor" href="#create-job-post" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create Job [POST]</h3>
 <ul>
 <li>
 <p>Request (application/json)</p>
@@ -1097,17 +1198,25 @@ DELETE : To delete resource
 <li>
 <p>Response 201 (application/json)</p>
 <pre><code>  {
-      "id": 1
-      "key": "ab2dh6fe"
-      "name": ""PHP Junior Programator"
+      "success": false
+      "data": {
+          "id": 1
+          "key": "ab2dh6fe"
+          "name": ""PHP Junior Programator"
+      }
   }
 </code></pre>
 </li>
 <li>
-<p>Response 401 (application/json)</p>
+<p>Response 403 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized request.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
@@ -1183,7 +1292,7 @@ DELETE : To delete resource
     </tr>
     <tr>
         <td> 8 </td>
-        <td> "Education, Science &amp; Research" </td>
+        <td> Education, Science &amp; Research </td>
     </tr>
     <tr>
         <td> 9 </td>
@@ -1215,7 +1324,7 @@ DELETE : To delete resource
     </tr>
     <tr>
         <td>16</td>
-        <td> "Construction, Architecture &amp; Real Estates" </td>
+        <td> Construction, Architecture &amp; Real Estates </td>
     </tr>
     <tr>
         <td>17</td>
@@ -1295,9 +1404,9 @@ DELETE : To delete resource
     </tr>
 </table>
 <h2>
-<a id="user-content-colletion-jobsfield_of_workstatuspagelimit" class="anchor" href="#colletion-jobsfield_of_workstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colletion [/jobs{?field_of_work,status,page,limit}]</h2>
+<a id="user-content-colletion-jobsfieldsfield_of_workstatuspagelimit" class="anchor" href="#colletion-jobsfieldsfield_of_workstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colletion [/jobs{?fields,field_of_work,status,page,limit}]</h2>
 <h3>
-<a id="user-content-list-get-2" class="anchor" href="#list-get-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-list-get" class="anchor" href="#list-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
 <ul>
 <li>
 <p>Parameters</p>
@@ -1318,12 +1427,92 @@ DELETE : To delete resource
 </li>
 <li>
 <p>Response 200 (application/json)</p>
-<pre><code>  [
-      {
+<pre><code>  {
+      "success": true,
+      "data": [
+          {
+              "id": 15,
+              "key": "ab2dh6fe",
+              "name": "PHP Programmer",
+              "company_id": 1,
+              "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+              "reward": {
+                  total: 1200,
+                  angel: 600,
+                  currency: "EUR"
+              },
+              "salary": {
+                  min: 1200,
+                  max: 2500,
+                  currency: "EUR"
+              },
+              "status": "published"
+          },
+          {
+              "id": 248,
+              "key": "poklrei7",
+              "name": "Sales Manager - Praha",
+              "company_id": 2,
+              "url": "https://jobangels.com/poklrei7/Sales-Manager-Praha",
+              "reward": {
+                  total: 450,
+                  angel: 225,
+                  currency: "EUR"
+              },
+              "salary": {
+                  min: 25000,
+                  max: 35000,
+                  currency: "CZK"
+              },
+              "status": "closed"
+          }
+      ],
+      "page": 1,
+      "perPage": 2,
+      "itemCount": 513,
+      "prevPage": null,
+      "nextPage": "/jobs?page=2"
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 403 (application/json)</p>
+<pre><code>  {
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
+  }
+</code></pre>
+</li>
+</ul>
+<h2>
+<a id="user-content-job-jobsid" class="anchor" href="#job-jobsid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Job [/jobs/{id}]</h2>
+<ul>
+<li>Parameters
+<ul>
+<li>id (required, number, <code>1</code>) - Numeric <code>id</code> of the job to perform action with.</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a id="user-content-detail-of-job-get" class="anchor" href="#detail-of-job-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detail of job [GET]</h3>
+<ul>
+<li>
+<p>Response 200</p>
+<pre><code>  {
+      "success": true,
+      "data": {
           "id": 15,
           "key": "ab2dh6fe",
-          "name": "PHP Programmer",
+          "name": "PHP Programmers",
           "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+          "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
+          "company_id": 1,
+          "lang": "sk",
           "reward": {
               total: 1200,
               angel: 600,
@@ -1334,124 +1523,33 @@ DELETE : To delete resource
               max: 2500,
               currency: "EUR"
           },
-          "status": "published"
-      },
-      {
-          "id": 248,
-          "key": "poklrei7",
-          "name": "Sales Manager - Praha",
-          "url": "https://jobangels.com/poklrei7/Sales-Manager-Praha",
-          "reward": {
-              total: 450,
-              angel: 225,
-              currency: "EUR"
-          },
-          "salary": {
-              min: 25000,
-              max: 35000,
-              currency: "CZK"
-          },
-          "status": "closed"
-      }
-  ]
-</code></pre>
-</li>
-<li>
-<p>Response 403 (application/json)</p>
-<pre><code>  {
-      "error": "Unauthorized",
-      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
-  }
-</code></pre>
-</li>
-</ul>
-<h3>
-<a id="user-content-create-put-2" class="anchor" href="#create-put-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create [PUT]</h3>
-<ul>
-<li>
-<p>Request (application/json)</p>
-<pre><code>  {
-      "name": "PHP Programmer"
-  }
-</code></pre>
-</li>
-<li>
-<p>Response 201 (application/json)</p>
-<pre><code>  {
-      "id": 15,
-      "key": "ab2dh6fe",
-      "name": "PHP Programmer",
-      "status": "draft"
-  }        
-</code></pre>
-</li>
-<li>
-<p>Response 401 (application/json)</p>
-<pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
-  }
-</code></pre>
-</li>
-</ul>
-<h2>
-<a id="user-content-offer-jobsid" class="anchor" href="#offer-jobsid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Offer [/jobs/{id}]</h2>
-<ul>
-<li>Parameters
-<ul>
-<li>id (required, number, <code>1</code>) - Numeric <code>id</code> of the job to perform action with.</li>
-</ul>
-</li>
-</ul>
-<h3>
-<a id="user-content-detail-get-1" class="anchor" href="#detail-get-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detail [GET]</h3>
-<ul>
-<li>
-<p>Response 200</p>
-<pre><code>  {
-      "id": 15,
-      "key": "ab2dh6fe",
-      "name": "PHP Programmers",
-      "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
-      "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
-      "company_id": 1,
-      "lang": "sk",
-      "reward": {
-          total: 1200,
-          angel: 600,
-          currency: "EUR"
-      },
-      "salary": {
-          min: 1200,
-          max: 2500,
-          currency: "EUR"
-      },
-      "status": "published",
-      "locations":[
-          {
-                "id": 351,
-                "country_key": "SK",
-                "street": "Jakubovo nám. 13",
-                "city": "Bratislava",
-                "postal_code": "811 09",
-                "region": "Bratislavský kraj",
-                "lat": 48.1459258,
-                "lng": 17.1071938  
-          },
-          {
-                "id": 351,
-                "country_key": "SK",
-                "street": "Černyševského 10",
-                "city": "Petržalka",
-                "postal_code": "85104",
-                "region": "Bratislavský kraj",
-                "lat": 48.3804996,
-                "lng": 17.5877285    
+          "status": "published",
+          "locations":[
+              {
+                    "id": 351,
+                    "country_key": "SK",
+                    "street": "Jakubovo nám. 13",
+                    "city": "Bratislava",
+                    "postal_code": "811 09",
+                    "region": "Bratislavský kraj",
+                    "lat": 48.1459258,
+                    "lng": 17.1071938  
+              },
+              {
+                    "id": 351,
+                    "country_key": "SK",
+                    "street": "Černyševského 10",
+                    "city": "Petržalka",
+                    "postal_code": "85104",
+                    "region": "Bratislavský kraj",
+                    "lat": 48.3804996,
+                    "lng": 17.5877285    
+              }
+          ],
+          "field_of_work": {
+              "id": 2,
+              "name": "IT &amp; Telecommunication"
           }
-      ],
-      "field_of_work": {
-          "id": 2,
-          "name": "IT &amp; Telecommunication"
       }
   }
 </code></pre>
@@ -1459,20 +1557,23 @@ DELETE : To delete resource
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h3>
-<a id="user-content-update-post-1" class="anchor" href="#update-post-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update [POST]</h3>
+<a id="user-content-update-job-put" class="anchor" href="#update-job-put" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update job [PUT]</h3>
 <ul>
 <li>
 <p>Request (application/json)</p>
 <pre><code>  {
-      "id": 15,
-      "key": "ab2dh6fe",
       "name": "PHP Junior Programmer",
       "reward": {
           total: 2000
@@ -1483,29 +1584,72 @@ DELETE : To delete resource
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  {
-      "id": 15,
-      "key": "ab2dh6fe",
-      "name": "PHP Junior Programmer",
-      "reward": {
-          total: 2000,
-          angel: 1000,
-          currency: EUR
-      },
-      "status": "published"
+      "success": true,
+      "data": {
+          "id": 15,
+          "key": "ab2dh6fe",
+          "name": "PHP Junior Programmer",
+          "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+          "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
+          "company_id": 1,
+          "lang": "sk",
+          "reward": {
+              total: 2000,
+              angel: 1000,
+              currency: "EUR"
+          },
+          "salary": {
+              min: 1200,
+              max: 2500,
+              currency: "EUR"
+          },
+          "status": "published",
+          "locations":[
+              {
+                    "id": 351,
+                    "country_key": "SK",
+                    "street": "Jakubovo nám. 13",
+                    "city": "Bratislava",
+                    "postal_code": "811 09",
+                    "region": "Bratislavský kraj",
+                    "lat": 48.1459258,
+                    "lng": 17.1071938  
+              },
+              {
+                    "id": 351,
+                    "country_key": "SK",
+                    "street": "Černyševského 10",
+                    "city": "Petržalka",
+                    "postal_code": "85104",
+                    "region": "Bratislavský kraj",
+                    "lat": 48.3804996,
+                    "lng": 17.5877285    
+              }
+          ],
+          "field_of_work": {
+              "id": 2,
+              "name": "IT &amp; Telecommunication"
+          }
+      }
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized reqest.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h2>
-<a id="user-content-applications-jobsidapplicationsstatuspagelimit" class="anchor" href="#applications-jobsidapplicationsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Applications [/jobs/{id}/applications{?status,page,limit}]</h2>
+<a id="user-content-job-applications-collection-jobsidapplicationsstatuspagelimit" class="anchor" href="#job-applications-collection-jobsidapplicationsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Job Applications Collection [/jobs/{id}/applications{?status,page,limit}]</h2>
 <ul>
 <li>Parameters
 <ul>
@@ -1525,40 +1669,54 @@ DELETE : To delete resource
 </li>
 </ul>
 <h3>
-<a id="user-content-list-get-3" class="anchor" href="#list-get-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-list-of-job-applications-get" class="anchor" href="#list-of-job-applications-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List of job applications [GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
 <pre><code>  [
-      {
-          "id": 1512,
-          "fname": "Peter",
-          "sname": "K.",
-          "application_date": "2018-01-11T08:40:51.620Z",
-          "status": "new"
-      },
-      {
-          "id": 248,
-          "fname": "Jaroslav",
-          "sname": "Novotný",
-          "application_date": "2018-01-14T18:34:17.186Z",
-          "viewed_date": "2018-01-15T09:03:52.152Z",
-          "status": "viewed"
-      },
-  ]
+      "success": true,
+      "data": [
+          {
+              "id": 1512,
+              "fname": "Peter",
+              "sname": "K.",
+              "application_date": "2018-01-11T08:40:51.620Z",
+              "status": "new"
+          },
+          {
+              "id": 248,
+              "fname": "Jaroslav",
+              "sname": "Novotný",
+              "application_date": "2018-01-14T18:34:17.186Z",
+              "viewed_date": "2018-01-15T09:03:52.152Z",
+              "status": "viewed"
+          }
+      ],
+      "page": 1,
+      "perPage": 2,
+      "itemCount": 7,
+      "prevPage": null,
+      "nextPage": "/jobs/1/applications?page=2"
 </code></pre>
 </li>
 <li>
 <p>Response 403 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized",
-      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h2>
-<a id="user-content-locations-jobsidlocationsstatuspagelimit" class="anchor" href="#locations-jobsidlocationsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Locations [/jobs/{id}/locations{?status,page,limit}]</h2>
+<a id="user-content-job-application-jobsidapplicationsapplication_id" class="anchor" href="#job-application-jobsidapplicationsapplication_id" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Job Application [/jobs/{id}/applications/{application_id}]</h2>
+<h2>
+<a id="user-content-job-locations-collection-jobsidlocationsstatuspagelimit" class="anchor" href="#job-locations-collection-jobsidlocationsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Job Locations Collection [/jobs/{id}/locations{?status,page,limit}]</h2>
 <ul>
 <li>Parameters
 <ul>
@@ -1578,40 +1736,60 @@ DELETE : To delete resource
 </li>
 </ul>
 <h3>
-<a id="user-content-list-get-4" class="anchor" href="#list-get-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-retrive-list-of-job-locations-get" class="anchor" href="#retrive-list-of-job-locations-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Retrive List of job locations [GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
-<pre><code>  [
-      {
-          "id": 1512,
-          "fname": "Peter",
-          "sname": "K.",
-          "application_date": "2018-01-11T08:40:51.620Z",
-          "status": "new"
-      },
-      {
-          "id": 248,
-          "fname": "Jaroslav",
-          "sname": "Novotný",
-          "application_date": "2018-01-14T18:34:17.186Z",
-          "viewed_date": "2018-01-15T09:03:52.152Z",
-          "status": "viewed"
-      },
-  ]
+<pre><code>  {
+      "success": true,
+      "data": [
+          {
+                "id": 351,
+                "job_id": 15,
+                "country_key": "SK",
+                "street": "Jakubovo nám. 13",
+                "city": "Bratislava",
+                "postal_code": "811 09",
+                "region": "Bratislavský kraj",
+                "lat": 48.1459258,
+                "lng": 17.1071938  
+          },
+          {
+                "id": 351,
+                "job_id": 15,
+                "country_key": "SK",
+                "street": "Černyševského 10",
+                "city": "Petržalka",
+                "postal_code": "85104",
+                "region": "Bratislavský kraj",
+                "lat": 48.3804996,
+                "lng": 17.5877285    
+          }
+      ],
+      "page": 1,
+      "perPage": 2,
+      "itemCount": 7,
+      "prevPage": null,
+      "nextPage": "/jobs/1/locations?page=2"
+  }
 </code></pre>
 </li>
 <li>
 <p>Response 403 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized",
-      "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+      "success": false,
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
 </ul>
 <h3>
-<a id="user-content-create-put-3" class="anchor" href="#create-put-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create [PUT]</h3>
+<a id="user-content-create-new-job-location-post" class="anchor" href="#create-new-job-location-post" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create new job location [POST]</h3>
 <ul>
 <li>
 <p>Request (application/json)</p>
@@ -1623,22 +1801,132 @@ DELETE : To delete resource
 <li>
 <p>Response 201 (application/json)</p>
 <pre><code>  {
-      "id": 153,
-      "country_key": "SK",
-      "street": "Jakubovo námestie 13",
-      "city": "Bratislava",
-      "postal_code": "811 09",
-      "region": "Bratislavský kraj",
-      "lat": 48.1459258,
-      "lng": 17.1071938 
+      "success": true,
+      "data" :{
+          "id": 153,
+          "country_key": "SK",
+          "street": "Jakubovo námestie 13",
+          "city": "Bratislava",
+          "postal_code": "811 09",
+          "region": "Bratislavský kraj",
+          "lat": 48.1459258,
+          "lng": 17.1071938 
+      }
   }
 </code></pre>
 </li>
 <li>
 <p>Response 401 (application/json)</p>
 <pre><code>  {
-      "error": "Unauthorized request.",
-      "message" : "Sorry, your access token is invalid or has been expired."
+      "success": false,
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 403 (application/json)</p>
+<pre><code>  {
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
+  }
+</code></pre>
+</li>
+</ul>
+<h2>
+<a id="user-content-job-location-jobsidlocationslocation_id" class="anchor" href="#job-location-jobsidlocationslocation_id" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Job Location [/jobs/{id}/locations/{location_id}]</h2>
+<h3>
+<a id="user-content-update-job-location-put" class="anchor" href="#update-job-location-put" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update Job Location [PUT]</h3>
+<ul>
+<li>
+<p>Request (application/json)</p>
+<pre><code>  {
+      "address": "Černyševského 10, Bratislava"
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 201 (application/json)</p>
+<pre><code>  {
+      "success": true,
+      "data" :{
+          "id": 153,
+          "country_key": "SK",
+          "street": "Černyševského 10",
+          "city": "Petržalka",
+          "postal_code": "85105",
+          "region": "Bratislavský kraj",
+          "lat": 48.1459258,
+          "lng": 17.1071938 
+      }
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 401 (application/json)</p>
+<pre><code>  {
+      "success": false,
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 403 (application/json)</p>
+<pre><code>  {
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
+  }
+</code></pre>
+</li>
+</ul>
+<h3>
+<a id="user-content-delete-job-location-delete" class="anchor" href="#delete-job-location-delete" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete Job Location [DELETE]</h3>
+<ul>
+<li>
+<p>Response 204 (application/json)</p>
+</li>
+<li>
+<p>Response 401 (application/json)</p>
+<pre><code>  {
+      "success": false,
+      "errors": [
+          {
+              "code": 401,
+              "message" : "Sorry, your access token is invalid or has been expired."
+          }
+      ]
+  }
+</code></pre>
+</li>
+<li>
+<p>Response 403 (application/json)</p>
+<pre><code>  {
+      "success": false
+      "errors": [
+          {
+              "code": 403,
+              "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+          }
+      ]
   }
 </code></pre>
 </li>
@@ -1660,36 +1948,60 @@ DELETE : To delete resource
 </ul>
 <hr>
 <h2>
-<a id="user-content-colletion-locations" class="anchor" href="#colletion-locations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colletion [/locations]</h2>
+<a id="user-content-colletion-locationsstatuspagelimit" class="anchor" href="#colletion-locationsstatuspagelimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colletion [/locations{?status,page,limit}]</h2>
+<ul>
+<li>Parameters
+<ul>
+<li>status (string, optional) - Status of application (new, viewed, hired, rejected, released).</li>
+<li>page (number, optional) - The current page number.
+<ul>
+<li>Default: 1</li>
+</ul>
+</li>
+<li>limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
+<ul>
+<li>Default: 10]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3>
-<a id="user-content-list-get-5" class="anchor" href="#list-get-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
+<a id="user-content-list-get-1" class="anchor" href="#list-get-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List [GET]</h3>
 <ul>
 <li>
 <p>Response 200 (application/json)</p>
-<pre><code>  [
-      {
-            "id": 351,
-            "job_id": 1,
-            "country_key": "SK",
-            "street": "Jakubovo nám. 13",
-            "city": "Bratislava",
-            "postal_code": "811 09",
-            "region": "Bratislavský kraj",
-            "lat": 48.1459258,
-            "lng": 17.1071938  
-      },
-      {
-            "id": 351,
-            "job_id": 1,
-            "country_key": "SK",
-            "street": "Černyševského 10",
-            "city": "Petržalka",
-            "postal_code": "85104",
-            "region": "Bratislavský kraj",
-            "lat": 48.3804996,
-            "lng": 17.5877285    
-      }
-  ]
+<pre><code>  {
+      "success": true,
+      "data": [
+          {
+                "id": 351,
+                "job_id": 1,
+                "country_key": "SK",
+                "street": "Jakubovo nám. 13",
+                "city": "Bratislava",
+                "postal_code": "811 09",
+                "region": "Bratislavský kraj",
+                "lat": 48.1459258,
+                "lng": 17.1071938  
+          },
+          {
+                "id": 351,
+                "job_id": 1,
+                "country_key": "SK",
+                "street": "Černyševského 10",
+                "city": "Petržalka",
+                "postal_code": "85104",
+                "region": "Bratislavský kraj",
+                "lat": 48.3804996,
+                "lng": 17.5877285    
+          }
+      ],
+      "page": 2,
+      "perPage": 2,
+      "itemCount": 176,
+      "prevPage": "/locations",
+      "nextPage": "/locations?page=3"
 </code></pre>
 </li>
 <li>
@@ -1703,15 +2015,24 @@ DELETE : To delete resource
 </ul>
 <h1>
 <a id="user-content-group-changelog" class="anchor" href="#group-changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Group Changelog</h1>
-<hr>
+<h2>
+<a id="user-content-04-2018-01-25" class="anchor" href="#04-2018-01-25" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0.4 (2018-01-25)</h2>
+<p><strong>Update Results</strong></p>
+<ul>
+<li>results with success</li>
+<li>result with error</li>
+<li>result with pagination
+<strong>Update Resource</strong>
+</li>
+<li>delete job location</li>
+</ul>
 <h2>
 <a id="user-content-03-2018-01-17" class="anchor" href="#03-2018-01-17" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0.3 (2018-01-17)</h2>
 <p><strong>Add Resources</strong></p>
 <ul>
-<li>Location resourse - basic</li>
-</ul>
-<p><strong>Update Resource</strong></p>
-<ul>
+<li>Location resourse - basic
+<strong>Update Resource</strong>
+</li>
 <li>company colletion was updated</li>
 <li>job colletion was updated</li>
 </ul>

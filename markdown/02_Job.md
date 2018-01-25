@@ -72,7 +72,7 @@
     </tr>
     <tr>
         <td> 8 </td>
-        <td> "Education, Science & Research" </td>
+        <td> Education, Science & Research </td>
     </tr>
     <tr>
         <td> 9 </td>
@@ -104,7 +104,7 @@
     </tr>
     <tr>
         <td>16</td>
-        <td> "Construction, Architecture & Real Estates" </td>
+        <td> Construction, Architecture & Real Estates </td>
     </tr>
     <tr>
         <td>17</td>
@@ -184,7 +184,8 @@
     </tr>
 </table>
 
-## Colletion [/jobs{?field_of_work,status,page,limit}]
+
+## Colletion [/jobs{?fields,field_of_work,status,page,limit}]
 
 ### List [GET]
 
@@ -199,12 +200,85 @@
 
 + Response 200 (application/json)
 
-        [
-            {
+        {
+            "success": true,
+            "data": [
+                {
+                    "id": 15,
+                    "key": "ab2dh6fe",
+                    "name": "PHP Programmer",
+                    "company_id": 1,
+                    "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+                    "reward": {
+                        total: 1200,
+                        angel: 600,
+                        currency: "EUR"
+                    },
+                    "salary": {
+                        min: 1200,
+                        max: 2500,
+                        currency: "EUR"
+                    },
+                    "status": "published"
+                },
+                {
+                    "id": 248,
+                    "key": "poklrei7",
+                    "name": "Sales Manager - Praha",
+                    "company_id": 2,
+                    "url": "https://jobangels.com/poklrei7/Sales-Manager-Praha",
+                    "reward": {
+                        total: 450,
+                        angel: 225,
+                        currency: "EUR"
+                    },
+                    "salary": {
+                        min: 25000,
+                        max: 35000,
+                        currency: "CZK"
+                    },
+                    "status": "closed"
+                }
+            ],
+            "page": 1,
+            "perPage": 2,
+            "itemCount": 513,
+            "prevPage": null,
+            "nextPage": "/jobs?page=2"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
+        }
+
+## Job [/jobs/{id}]
+
++ Parameters
+    + id (required, number, `1`) - Numeric `id` of the job to perform action with.
+
+
+### Detail of job [GET] 
+
++ Response 200
+
+        {
+            "success": true,
+            "data": {
                 "id": 15,
                 "key": "ab2dh6fe",
-                "name": "PHP Programmer",
+                "name": "PHP Programmers",
                 "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+                "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
+                "company_id": 1,
+                "lang": "sk",
                 "reward": {
                     total: 1200,
                     angel: 600,
@@ -215,131 +289,53 @@
                     max: 2500,
                     currency: "EUR"
                 },
-                "status": "published"
-            },
-            {
-                "id": 248,
-                "key": "poklrei7",
-                "name": "Sales Manager - Praha",
-                "url": "https://jobangels.com/poklrei7/Sales-Manager-Praha",
-                "reward": {
-                    total: 450,
-                    angel: 225,
-                    currency: "EUR"
-                },
-                "salary": {
-                    min: 25000,
-                    max: 35000,
-                    currency: "CZK"
-                },
-                "status": "closed"
-            }
-        ]
-
-+ Response 403 (application/json)
-
-        {
-            "error": "Unauthorized",
-            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
-        }
-
-### Create [PUT]
-
-+ Request (application/json)
-
-        {
-            "name": "PHP Programmer"
-        }
-
-
-+ Response 201 (application/json)
-
-        {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Programmer",
-            "status": "draft"
-        }        
-
-
-+ Response 401 (application/json)
-
-        {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
-        }
-
-## Offer [/jobs/{id}]
-
-+ Parameters
-    + id (required, number, `1`) - Numeric `id` of the job to perform action with.
-
-
-### Detail [GET] 
-
-+ Response 200
-
-        {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Programmers",
-            "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
-            "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
-            "company_id": 1,
-            "lang": "sk",
-            "reward": {
-                total: 1200,
-                angel: 600,
-                currency: "EUR"
-            },
-            "salary": {
-                min: 1200,
-                max: 2500,
-                currency: "EUR"
-            },
-            "status": "published",
-            "locations":[
-                {
-                      "id": 351,
-                      "country_key": "SK",
-                      "street": "Jakubovo nám. 13",
-                      "city": "Bratislava",
-                      "postal_code": "811 09",
-                      "region": "Bratislavský kraj",
-                      "lat": 48.1459258,
-                      "lng": 17.1071938  
-                },
-                {
-                      "id": 351,
-                      "country_key": "SK",
-                      "street": "Černyševského 10",
-                      "city": "Petržalka",
-                      "postal_code": "85104",
-                      "region": "Bratislavský kraj",
-                      "lat": 48.3804996,
-                      "lng": 17.5877285    
+                "status": "published",
+                "locations":[
+                    {
+                          "id": 351,
+                          "country_key": "SK",
+                          "street": "Jakubovo nám. 13",
+                          "city": "Bratislava",
+                          "postal_code": "811 09",
+                          "region": "Bratislavský kraj",
+                          "lat": 48.1459258,
+                          "lng": 17.1071938  
+                    },
+                    {
+                          "id": 351,
+                          "country_key": "SK",
+                          "street": "Černyševského 10",
+                          "city": "Petržalka",
+                          "postal_code": "85104",
+                          "region": "Bratislavský kraj",
+                          "lat": 48.3804996,
+                          "lng": 17.5877285    
+                    }
+                ],
+                "field_of_work": {
+                    "id": 2,
+                    "name": "IT & Telecommunication"
                 }
-            ],
-            "field_of_work": {
-                "id": 2,
-                "name": "IT & Telecommunication"
             }
         }
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
         }
 
-### Update [POST]
+### Update job [PUT]
 
 + Request (application/json)
 
         {
-            "id": 15,
-            "key": "ab2dh6fe",
             "name": "PHP Junior Programmer",
             "reward": {
                 total: 2000
@@ -349,27 +345,70 @@
 + Response 200 (application/json)
     
         {
-            "id": 15,
-            "key": "ab2dh6fe",
-            "name": "PHP Junior Programmer",
-            "reward": {
-                total: 2000,
-                angel: 1000,
-                currency: EUR
-            },
-            "status": "published"
+            "success": true,
+            "data": {
+                "id": 15,
+                "key": "ab2dh6fe",
+                "name": "PHP Junior Programmer",
+                "url": "https://jobangels.com/ab2dh6fe/PHP-Programmer",
+                "cover": "https://jobangels.net/jobangels/image/upload/c_crop,h_1732,w_3694,x_0,y_240/c_fill,h_450,w_960/4bc9372c0583fa97fd062eda271c98dc0c442185c9791b13c11cf063788f21cfd30e84f5.jpg",
+                "company_id": 1,
+                "lang": "sk",
+                "reward": {
+                    total: 2000,
+                    angel: 1000,
+                    currency: "EUR"
+                },
+                "salary": {
+                    min: 1200,
+                    max: 2500,
+                    currency: "EUR"
+                },
+                "status": "published",
+                "locations":[
+                    {
+                          "id": 351,
+                          "country_key": "SK",
+                          "street": "Jakubovo nám. 13",
+                          "city": "Bratislava",
+                          "postal_code": "811 09",
+                          "region": "Bratislavský kraj",
+                          "lat": 48.1459258,
+                          "lng": 17.1071938  
+                    },
+                    {
+                          "id": 351,
+                          "country_key": "SK",
+                          "street": "Černyševského 10",
+                          "city": "Petržalka",
+                          "postal_code": "85104",
+                          "region": "Bratislavský kraj",
+                          "lat": 48.3804996,
+                          "lng": 17.5877285    
+                    }
+                ],
+                "field_of_work": {
+                    "id": 2,
+                    "name": "IT & Telecommunication"
+                }
+            }
         }
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized reqest.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
         }
 
 
 
-## Applications [/jobs/{id}/applications{?status,page,limit}]
+## Job Applications Collection [/jobs/{id}/applications{?status,page,limit}]
 
 + Parameters
     + id (number, required, `15`) - Job identifier as integer.
@@ -380,37 +419,54 @@
         + Default: 10
 
 
-### List [GET]
+### List of job applications [GET]
 
 + Response 200 (application/json)
 
         [
-            {
-                "id": 1512,
-                "fname": "Peter",
-                "sname": "K.",
-                "application_date": "2018-01-11T08:40:51.620Z",
-                "status": "new"
-            },
-            {
-                "id": 248,
-                "fname": "Jaroslav",
-                "sname": "Novotný",
-                "application_date": "2018-01-14T18:34:17.186Z",
-                "viewed_date": "2018-01-15T09:03:52.152Z",
-                "status": "viewed"
-            },
-        ]
+            "success": true,
+            "data": [
+                {
+                    "id": 1512,
+                    "fname": "Peter",
+                    "sname": "K.",
+                    "application_date": "2018-01-11T08:40:51.620Z",
+                    "status": "new"
+                },
+                {
+                    "id": 248,
+                    "fname": "Jaroslav",
+                    "sname": "Novotný",
+                    "application_date": "2018-01-14T18:34:17.186Z",
+                    "viewed_date": "2018-01-15T09:03:52.152Z",
+                    "status": "viewed"
+                }
+            ],
+            "page": 1,
+            "perPage": 2,
+            "itemCount": 7,
+            "prevPage": null,
+            "nextPage": "/jobs/1/applications?page=2"
+
 
 + Response 403 (application/json)
 
         {
-            "error": "Unauthorized",
-            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }
 
+## Job Application [/jobs/{id}/applications/{application_id}]
 
-## Locations [/jobs/{id}/locations{?status,page,limit}]
+
+
+
+## Job Locations Collection [/jobs/{id}/locations{?status,page,limit}]
 
 + Parameters
     + id (number, required, `15`) - Company identifier as integer.
@@ -420,36 +476,56 @@
     + limit (number, optional) - Maximum of results. Limit can be a number from 1 - 100.
         + Default: 10
 
-### List [GET]
+### Retrive List of job locations [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1512,
-                "fname": "Peter",
-                "sname": "K.",
-                "application_date": "2018-01-11T08:40:51.620Z",
-                "status": "new"
-            },
-            {
-                "id": 248,
-                "fname": "Jaroslav",
-                "sname": "Novotný",
-                "application_date": "2018-01-14T18:34:17.186Z",
-                "viewed_date": "2018-01-15T09:03:52.152Z",
-                "status": "viewed"
-            },
-        ]
+        {
+            "success": true,
+            "data": [
+                {
+                      "id": 351,
+                      "job_id": 15,
+                      "country_key": "SK",
+                      "street": "Jakubovo nám. 13",
+                      "city": "Bratislava",
+                      "postal_code": "811 09",
+                      "region": "Bratislavský kraj",
+                      "lat": 48.1459258,
+                      "lng": 17.1071938  
+                },
+                {
+                      "id": 351,
+                      "job_id": 15,
+                      "country_key": "SK",
+                      "street": "Černyševského 10",
+                      "city": "Petržalka",
+                      "postal_code": "85104",
+                      "region": "Bratislavský kraj",
+                      "lat": 48.3804996,
+                      "lng": 17.5877285    
+                }
+            ],
+            "page": 1,
+            "perPage": 2,
+            "itemCount": 7,
+            "prevPage": null,
+            "nextPage": "/jobs/1/locations?page=2"
+        }
 
 + Response 403 (application/json)
 
         {
-            "error": "Unauthorized",
-            "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+            "success": false,
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }
 
-### Create [PUT]
+### Create new job location [POST]
 
 + Request (application/json)
 
@@ -461,20 +537,120 @@
 + Response 201 (application/json)
 
         {
-            "id": 153,
-            "country_key": "SK",
-            "street": "Jakubovo námestie 13",
-            "city": "Bratislava",
-            "postal_code": "811 09",
-            "region": "Bratislavský kraj",
-            "lat": 48.1459258,
-            "lng": 17.1071938 
+            "success": true,
+            "data" :{
+                "id": 153,
+                "country_key": "SK",
+                "street": "Jakubovo námestie 13",
+                "city": "Bratislava",
+                "postal_code": "811 09",
+                "region": "Bratislavský kraj",
+                "lat": 48.1459258,
+                "lng": 17.1071938 
+            }
         }
 
 
 + Response 401 (application/json)
 
         {
-            "error": "Unauthorized request.",
-            "message" : "Sorry, your access token is invalid or has been expired."
+            "success": false,
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
+        }
+
++ Response 403 (application/json)
+
+        {
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
+        }
+
+## Job Location [/jobs/{id}/locations/{location_id}]
+
+### Update Job Location [PUT]
+
++ Request (application/json)
+
+        {
+            "address": "Černyševského 10, Bratislava"
+        }
+
+   
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "data" :{
+                "id": 153,
+                "country_key": "SK",
+                "street": "Černyševského 10",
+                "city": "Petržalka",
+                "postal_code": "85105",
+                "region": "Bratislavský kraj",
+                "lat": 48.1459258,
+                "lng": 17.1071938 
+            }
+        }
+
+
++ Response 401 (application/json)
+
+        {
+            "success": false,
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
+        }
+
++ Response 403 (application/json)
+
+        {
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
+        }
+
+### Delete Job Location [DELETE]
+   
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+
+        {
+            "success": false,
+            "errors": [
+                {
+                    "code": 401,
+                    "message" : "Sorry, your access token is invalid or has been expired."
+                }
+            ]
+        }
+
++ Response 403 (application/json)
+
+        {
+            "success": false
+            "errors": [
+                {
+                    "code": 403,
+                    "message" : "The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort."
+                }
+            ]
         }
